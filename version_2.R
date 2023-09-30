@@ -1,5 +1,3 @@
-
-# Load required libraries
 library(shiny)
 
 ## Setting the quiz questions
@@ -30,9 +28,10 @@ display_question <- function(question) {
 ## creating actual ui and server for quiz
 ui <- fluidPage(
   titlePanel("How well do you know Drosophila melanogaster?"),
+  imageOutput("quiz_image"),
   uiOutput("quiz_ui"),
   actionButton("submit_button", "Submit"),
-  imageOutput("quiz_image")
+ 
 )
 
 server <- function(input, output, session) {
@@ -46,7 +45,7 @@ server <- function(input, output, session) {
         display_question(question)
       })
       output$quiz_image <- renderImage({
-        list(src = paste0("www/", question$image_filename), width = 200, height = 150)
+        list(src = paste0(question$image_filename), width = 200, height = 150)
       }, deleteFile = FALSE)
     } else {
       output$quiz_ui <- renderText("Quiz completed. Your score:")
