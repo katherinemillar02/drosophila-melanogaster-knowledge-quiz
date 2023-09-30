@@ -3,23 +3,47 @@ library(shiny)
 ## Setting the quiz questions
 questions <- list(
   list(
-    image_filename = "images/drosophila_melanogaster_quiz.jpg",
+    image_filename = "drosophila_melanogaster_quiz.jpg",
     question = "What is the common name for Drosophila melanogaster?",
-    choices = c("House Fly", "Fruit Fly", "Mosquito", "Butterfly"),
+    choices = c("House Fly", "Fruit Fly", "Mosquito"),
     correct = "Fruit Fly"
   ),
+  
   list(
-    image_filename = "images/sex_chromosomes_quiz.png",
-    question = "Which chromosome determines the sex of Drosophila melanogaster?",
+    image_filename = "sex_chromosomes_quiz.png",
+    question = "Which chromosome/s determines the sex of Drosophila melanogaster?",
     choices = c("Both X and Y chromosomes", "Y chromosome", "X chromosome"),
     correct = "X chromosome"
   ), 
+  
   list(
-    image_filename = "sex_chromosomes_quiz.png",
+    image_filename = "drosophils_discovery.jpg",
     question = "Who first discovered Drosophila melanogaster as a model organism?",
-    choices = c("Emile Mapus", "Thomas Hunt Morgan", "Gregor Mendel"),
-    correct = "Thomas Hunt Morgan"
-  ), 
+    choices = c("Emile Mapus", "Thomas Hunt Morgan", "Gregor"),
+    correct = "Thomas Hunt Morgan"), 
+  
+  list(
+    image_filename = "white_eyed_mutant.webp",
+    question = "What is a white eyed mutant in Drosophila melanogaster",
+    choices = c("A fly that has red eyes, instead of white", "A fly that has white eyes, instead of red", "A fly that has scarlet eyes, instead of white"),
+    correct = "A fly that has white eyes, instead of red"), 
+  
+  
+  list(
+    image_filename = "drosophila_genome_quiz.jpeg",
+    question = "What features characterise the genome of drosophila melanogaster?",
+    choices = c("Two pairs of chromosomes", "Four pairs of chromosomes", "Eight pairs of chromosomes"),
+    correct = "Four pairs of chromosomes"), 
+  
+  
+  list(
+    image_filename = "male_female_quiz.jpg",
+    question = "Is the male drosophila on the left or the right?",
+    choices = c("The left", "The right"),
+    correct = "The left")
+  
+  
+  
   
   
 )
@@ -84,6 +108,9 @@ server <- function(input, output, session) {
     }
   })
 }
+
+
+
 
 ## running the app
 shinyApp(ui, server)
