@@ -1,11 +1,13 @@
+
+## required shiny package
 library(shiny)
 
-## Setting the quiz questions
+## Setting the quiz questions in list 
 questions <- list(
   list(
     image_filename = "drosophila_melanogaster_quiz.jpg",
     question = "What is the common name for Drosophila melanogaster?",
-    choices = c("House Fly", "Fruit Fly", "Mosquito"),
+    choices = c("House Fly", "Fruit Fly", "Mosquito", "Butterfly"),
     correct = "Fruit Fly"
   ),
   
@@ -19,7 +21,7 @@ questions <- list(
   list(
     image_filename = "drosophils_discovery.jpg",
     question = "Who first discovered Drosophila melanogaster as a model organism?",
-    choices = c("Emile Mapus", "Thomas Hunt Morgan", "Gregor"),
+    choices = c("Emile Mapus", "Thomas Hunt Morgan", "Gregor Mendel", "Nettie Stevens"),
     correct = "Thomas Hunt Morgan"), 
   
   list(
@@ -32,7 +34,7 @@ questions <- list(
   list(
     image_filename = "drosophila_genome_quiz.jpeg",
     question = "What features characterise the genome of drosophila melanogaster?",
-    choices = c("Two pairs of chromosomes", "Four pairs of chromosomes", "Eight pairs of chromosomes"),
+    choices = c("Two pairs of chromosomes", "Four pairs of chromosomes", "Eight pairs of chromosomes", "Sixteen pairs of chromosomes"),
     correct = "Four pairs of chromosomes"), 
   
   
@@ -40,10 +42,32 @@ questions <- list(
     image_filename = "male_female_quiz.jpg",
     question = "Is the male drosophila on the left or the right?",
     choices = c("The left", "The right"),
-    correct = "The left")
+    correct = "The left"), 
+  
+  list(
+    image_filename = "flybase_quiz.png",
+    question = "Which online database is the primary resource for genetic information for Drosophila researchers?",
+    choices = c("DrosophilaDB", "GeneCards", "FlyBase", "DrosophilaSearch"),
+    correct = "FlyBase"), 
+  
+  list(
+    image_filename = "gal4uas.png",
+    question = "In Drosophila melanogaster research, what is the GAL4UAS system used for?",
+    choices = c("Studying embryobnic development", "Analysing feeding behaviour", "Controlling gene expression in specific tissues or cells"),
+    correct = "Controlling gene expression in specific tissues or cells"), 
   
   
+  list(
+    image_filename = "drosophila_similarity_quiz.PNG",
+    question = "What genetic similarity does the Drosophila melanogaster genome have to humans?",
+    choices = c("About 5%", "About 20%", "About 60%", "About 100%"),
+    correct = "About 60%"), 
   
+  list(
+    image_filename = "drosophila_love.jpg",
+    question = "What is the best insect in the universe?",
+    choices = c("Drosophila melanogaster", "Drosophila melanogaster", "Drosophila melanogaster", "Drosophila melanogaster"),
+    correct = "Drosophila melanogaster")
   
   
 )
@@ -58,7 +82,7 @@ display_question <- function(question) {
            )
     ),
     column(12,
-           h4(question$question, class = "text-center"),
+           h4(question$question, class = "text-left"),
            radioButtons("answer", "Pick one answer:", question$choices)
     )
   )
@@ -66,9 +90,9 @@ display_question <- function(question) {
 
 ## creating actual ui and server for quiz
 ui <- fluidPage(
-  titlePanel("How well do you know Drosophila melanogaster?", class = "mt-3 mb-3"),
+  titlePanel("How well do you know Drosophila melanogaster?"),
+  uiOutput("quiz_ui"),
   actionButton("submit_button", "Submit", class = "mt-3"),
-  uiOutput("quiz_ui")
 )
 
 server <- function(input, output, session) {
@@ -82,7 +106,7 @@ server <- function(input, output, session) {
         display_question(question)
       })
       output$question_image <- renderImage({
-        list(src = question$image_filename, width = 300, height = 250)
+        list(src = question$image_filename, width = 550, height = 400)
       }, deleteFile = FALSE)
     } else {
       output$quiz_ui <- renderText("Quiz completed. Your score:")
